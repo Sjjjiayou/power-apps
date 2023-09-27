@@ -1,0 +1,21 @@
+{
+  "extends": "./node_modules/pcf-scripts/tsconfig_base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "~/*": ["src/*"],
+      "assets/*": ["src/assets/*"]
+    },
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2015",
+    "lib": ["dom", "es2017"],
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "typeRoots": ["./node_modules/@types", "./custom.d.ts"]
+  }
+}
