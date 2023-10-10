@@ -1,10 +1,9 @@
 import * as React from "react";
 import { PageProps } from "./type";
-import html2canvas from "html2canvas";
 // import { Howl } from "howler";
 
 export const Pages = React.memo((props: PageProps) => {
-  const { width, height, columns, records, auditLog } = props;
+  const { width, height, columns, records, auditLogSet } = props;
   console.log("columns", columns);
   console.log("records", records);
 
@@ -28,31 +27,33 @@ export const Pages = React.memo((props: PageProps) => {
   ];
 
   const handleClick = React.useCallback(() => {
-    const imageDOM = document.getElementById("image-set");
-    console.log("imageDOM", imageDOM);
-    if (imageDOM) {
-      html2canvas(imageDOM).then(function (canvas) {
-        const urlData = canvas.toDataURL("image/png", 1);
-        const bytes = window.atob(urlData.split(",")[1]);
-        const mime = urlData.split(",")[0].match(/:(.*?);/)?.[1];
-        const ab = new ArrayBuffer(bytes.length);
-        const ia = new Uint8Array(ab);
-        for (let i = 0; i < bytes.length; i++) {
-          ia[i] = bytes.charCodeAt(i);
-        }
-        const file = new File([ab], `picture.png`, { type: mime });
-        const url = window.URL.createObjectURL(file);
-        const tagA = document.createElement("a");
-        tagA.setAttribute("href", url);
-        tagA.setAttribute("download", `picture.png`);
-        tagA.setAttribute("target", "_blank");
-        document.body.appendChild(tagA);
-        tagA.click();
-        document.body.removeChild(tagA);
-      });
+    console.log("44444444")
+    const auditLog = auditLogSet.records;
+
+    console.log("auditLog", auditLog);
+    console.log("auditLogSet-in", auditLogSet)
+    if (Object.keys(auditLog).length > 0) {
+      console.log(
+        "getColumnInfo",
+        // @ts-ignore
+        auditLog["1d85ca34-e434-ed11-9daf-0017fa020932"].getColumnInfo(
+          "AppName"
+        )
+      );
+      auditLog["1d85ca34-e434-ed11-9daf-0017fa020932"]
+        // @ts-ignore
+        .setValue("jjmc_appname", "测试应用");
+      auditLog["1d85ca34-e434-ed11-9daf-0017fa020932"]
+        // @ts-ignore
+        .save()
+        .then((res) => {
+          console.log("res", res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-    // auditLog['fb4bfcf4-9c34-ed11-9daf-0017fa020932'].setValue('AppName', '测试应用')
-  }, []);
+  }, [auditLogSet]);
 
   // const sound = new Howl({
   //   src: [

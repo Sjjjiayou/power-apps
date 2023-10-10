@@ -52,6 +52,7 @@ export class AnnualReport
     // Add code to update control view
     console.log("context.parameters", context.parameters);
     console.log("context", context);
+    console.log("333333");
     const dataset = context.parameters.records;
     const auditLogSet = context.parameters.auditLog;
 
@@ -67,16 +68,18 @@ export class AnnualReport
 
     if (datasetChanged || this.isTestHarness) {
       this.records = dataset.records;
-      this.auditLog = auditLogSet.records;
-    } 
+    }
+
+    console.log("auditLogSet", auditLogSet)
 
     ReactDOM.render(
       React.createElement(Pages, {
         width: allocatedWidth,
         height: allocatedHeight,
         columns: dataset.columns,
+        auditLogColumns: auditLogSet.columns,
         records: this.records,
-        auditLog: this.auditLog,
+        auditLogSet: auditLogSet,
       }),
       this.container
     );
