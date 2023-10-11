@@ -7,5 +7,5 @@ export interface PageProps {
     string,
     ComponentFramework.PropertyHelper.DataSetApi.EntityRecord
   >;
-  auditLogSet: ComponentFramework.PropertyTypes.DataSet
+  auditLogSet: ComponentFramework.PropertyTypes.DataSet;
 }
