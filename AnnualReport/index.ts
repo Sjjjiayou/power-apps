@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import html2canvas from "html2canvas";
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import { Pages } from "./Pages";
 
@@ -8,6 +9,7 @@ export class AnnualReport
 {
   notifyOutputChanged: () => void;
   container: HTMLDivElement;
+  private button: HTMLButtonElement;
   context: ComponentFramework.Context<IInputs>;
   sortedRecordsIds: string[] = [];
   resources: ComponentFramework.Resources;
@@ -15,9 +17,28 @@ export class AnnualReport
   records: {
     [id: string]: ComponentFramework.PropertyHelper.DataSetApi.EntityRecord;
   };
-  auditLog: {
-    [id: string]: ComponentFramework.PropertyHelper.DataSetApi.EntityRecord;
+  buttonDom: HTMLElement | null;
+
+  handleShotDom = async (dom: HTMLElement | null) => {
+    console.log("dom", dom);
+    // this.buttonDom = dom;
+    if (document.body) {
+      const abc = await html2canvas(document.body).then(function (canvas) {
+        console.log(canvas);
+        //document.body.appendChild(canvas);
+        var outputbase = canvas
+          .toDataURL("image/jpeg")
+          .replace("image/jpeg", "image/octet-stream");
+        return outputbase;
+      });
+      console.log(abc);
+      const link = document.createElement("a");
+      link.href = abc;
+      link.download = "download-new.png";
+      link.click();
+    }
   };
+
   /**
    * Empty constructor.
    */
@@ -43,6 +64,13 @@ export class AnnualReport
     this.context.mode.trackContainerResize(true);
     this.resources = this.context.resources;
     this.isTestHarness = document.getElementById("control-dimensions") !== null;
+    this.button = document.createElement("button");
+    container.id = "containerid";
+    container.appendChild(this.button);
+    this.button.addEventListener("click", this.onButtonClick.bind(this));
+    // Adding the label and button created to the container DIV.
+    this.button.style.width = 20 + "px";
+    this.button.style.height = 20 + "px";
   }
   /**
    * Called when any value in the property bag has changed. This includes field values, data-sets, global values such as container height and width, offline status, control metadata values such as label, visible, etc.
@@ -50,12 +78,8 @@ export class AnnualReport
    */
   public updateView(context: ComponentFramework.Context<IInputs>): void {
     // Add code to update control view
-    console.log("context.parameters", context.parameters);
     console.log("context", context);
-    console.log("333333");
     const dataset = context.parameters.records;
-    const auditLogSet = context.parameters.auditLog;
-
     const datasetChanged = context.updatedProperties.indexOf("dataset") > -1;
 
     // The test harness provides width/height as strings
@@ -70,16 +94,14 @@ export class AnnualReport
       this.records = dataset.records;
     }
 
-    console.log("auditLogSet", auditLogSet)
 
     ReactDOM.render(
       React.createElement(Pages, {
         width: allocatedWidth,
         height: allocatedHeight,
         columns: dataset.columns,
-        auditLogColumns: auditLogSet.columns,
         records: this.records,
-        auditLogSet: auditLogSet,
+        handleShotDom: this.handleShotDom,
       }),
       this.container
     );
@@ -90,6 +112,10 @@ export class AnnualReport
    */
   public getOutputs(): IOutputs {
     return {};
+  }
+
+  public async onButtonClick(event: Event): Promise<void> {
+    console.log("this.buttonDom", this.buttonDom);
   }
 
   /**
