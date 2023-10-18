@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import html2canvas from "html2canvas";
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import { Pages } from "./Pages";
+import { Howl } from "howler";
 
 export class AnnualReport
   implements ComponentFramework.StandardControl<IInputs, IOutputs>
@@ -94,7 +95,6 @@ export class AnnualReport
       this.records = dataset.records;
     }
 
-
     ReactDOM.render(
       React.createElement(Pages, {
         width: allocatedWidth,
@@ -125,4 +125,5 @@ export class AnnualReport
   public destroy(): void {
     ReactDOM.unmountComponentAtNode(this.container);
   }
+
 }
