@@ -1,17 +1,18 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-// import { Howl } from "howler";
+import { Howl } from "howler";
 import { PageProps } from "./type";
 import "swiper/css";
 import "swiper/css/effect-fade";
-// import "./css/AnnualReportControl.css";
+import "./css/AnnualReport.css";
 import { EffectFade } from "swiper/modules";
+import classNames from "classnames";
 
 export const Pages = React.memo((props: PageProps) => {
   const { width, height, columns, records, handleShotDom } = props;
 
-  const [slideActiveIndex, setSlideActiveIndex] = useState(0);
-  const [isSlide, setSlide] = useState(false);
+  const [isSlide, setSlide] = useState(true);
+  const [isPauseMusic, setPauseMusic] = useState(false);
 
   const [pageConfigureEntityRecord, setPageConfigureEntityRecord] = useState<
     any[]
@@ -109,24 +110,37 @@ export const Pages = React.memo((props: PageProps) => {
     }
   };
 
-  // const sound = new Howl({
-  //   src: [
-  //     "https://charm123.oss-cn-beijing.aliyuncs.com/OSS/www/P301624281166438.mp3",
-  //   ],
-  //   autoplay: true,
-  //   loop: true,
-  //   volume: 0.5,
-  //   onend: function () {
-  //     console.log("Finished!");
-  //   },
-  // });
+  const handleMusic = () => {
+    setPauseMusic(!isPauseMusic);
+    console.log("isPauseMusic666", isPauseMusic);
+  };
 
-  // useEffect(() => {
-  //   sound.play();
-  //   return () => {
-  //     sound.pause();
-  //   };
-  // }, []);
+  const sound = new Howl({
+    src: [
+      "https://charm123.oss-cn-beijing.aliyuncs.com/OSS/www/P301624281166438.mp3",
+    ],
+    autoplay: true,
+    loop: true,
+    volume: 0.5,
+    onend: function () {
+      console.log("Finished!");
+    },
+  });
+
+
+  useEffect(() => {
+    console.log(99999999);
+    sound.play();
+  }, []);
+
+  useEffect(() => {
+    const id = sound.play();
+    console.log("id", id);
+    console.log("isPauseMusic", isPauseMusic);
+    if (isPauseMusic) {
+      sound.pause(id);
+    }
+  }, [isPauseMusic]);
 
   useEffect(() => {
     let wantArray: any[] = [];
@@ -149,28 +163,22 @@ export const Pages = React.memo((props: PageProps) => {
 
   // console.log("pageConfigureEntityRecord8888", pageConfigureEntityRecord);
 
-  useLayoutEffect(() => {
-    pageConfigureEntityRecord.forEach((element, pageIndex) => {
-      element.data.forEach((_item, index) => {
-        console.log("slideActiveIndex", slideActiveIndex);
-        console.log("pageIndex", pageIndex);
-
-        if (slideActiveIndex === pageIndex) {
-          let contextContentById = document.getElementById(
-            `textContent${pageIndex}`
-          );
-          if (contextContentById) {
-            const text = contextContentById.getElementsByClassName("text-row");
-            console.log("text", text);
-            // @ts-ignore
-            text.item(index).style.animationDelay = `${index * 2}s`;
-          }
-        }
-      });
-    });
-  }, [slideActiveIndex]);
-
-  console.log("isSlide", isSlide);
+  // useEffect(() => {
+  //   pageConfigureEntityRecord.forEach((element, pageIndex) => {
+  //     element.data.forEach((_item, index) => {
+  //       console.log("pageIndex", pageIndex);
+  //       let contextContentById = document.getElementById(
+  //         `textContent${pageIndex}`
+  //       );
+  //       if (contextContentById) {
+  //         const text = contextContentById.getElementsByClassName("text-row");
+  //         console.log("text", text);
+  //         // @ts-ignore
+  //         text.item(index).style.animationDelay = `${index * 2}s`;
+  //       }
+  //     });
+  //   });
+  // }, []);
 
   return (
     <div
@@ -185,15 +193,15 @@ export const Pages = React.memo((props: PageProps) => {
         modules={[EffectFade]}
         className="mySwiper"
         onSlideChange={() => {
-          setSlide(!isSlide);
-        }}
-        onActiveIndexChange={(swiper) => {
-          setSlideActiveIndex(swiper.activeIndex);
+          setSlide(false);
+          setTimeout(() => {
+            setSlide(true);
+          }, 0);
         }}
       >
         {pageConfigureEntityRecord.map((item, index) => {
           return (
-            <SwiperSlide key={item} virtualIndex={index}>
+            <SwiperSlide key={index} virtualIndex={index}>
               <div
                 style={{
                   height: height,
@@ -206,13 +214,34 @@ export const Pages = React.memo((props: PageProps) => {
                 {item.data.map((text, itemIndex) => {
                   return (
                     <span
-                      className="text-row"
+                      className={classNames({ "text-row": isSlide })}
+                      style={{
+                        animationDelay: `${itemIndex * 2}s`,
+                      }}
                       key={itemIndex}
                     >
                       {text}
                     </span>
                   );
                 })}
+              </div>
+              <div className="music-position" onClick={handleMusic}>
+                <img
+                  src="https://charm123.oss-cn-beijing.aliyuncs.com/OSS/www/music1.png"
+                  alt="musicPng"
+                  width={35}
+                  height={35}
+                  className="music-img"
+                />
+              </div>
+              <div className="top-element-position">
+                <img
+                  src="https://charm123.oss-cn-beijing.aliyuncs.com/OSS/www/cloud.png"
+                  alt="topElement"
+                  width={146}
+                  height={28}
+                  className="cloud-img"
+                />
               </div>
             </SwiperSlide>
           );

@@ -4,7 +4,7 @@
 
 .text-container {
   position: absolute;
-  top: 100px;
+  top: 120px;
   left: 20px;
   display: flex;
   flex-direction: column;
@@ -27,5 +27,55 @@
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+.music-position {
+  position: absolute;
+  top: 80px;
+  right: 20px;
+}
+
+.music-img {
+  animation: loop 2s linear infinite;
+}
+
+@keyframes loop {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(90deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(270deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.top-element-position {
+  position: absolute;
+  top: 80px;
+}
+
+.cloud-img {
+  animation: 3s linear 1s infinite alternate slideIn;
+}
+
+@keyframes slideIn {
+  from {
+    margin-left: 0%;
+  }
+  to {
+    margin-left: 100%;
   }
 }
