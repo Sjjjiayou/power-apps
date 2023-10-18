@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Howl } from "howler";
 import { PageProps } from "./type";
@@ -12,6 +12,7 @@ export const Pages = React.memo((props: PageProps) => {
   const { width, height, columns, records, handleShotDom } = props;
 
   const [isSlide, setSlide] = useState(true);
+  const playIdRef = useRef();
   const [isPauseMusic, setPauseMusic] = useState(false);
 
   const [pageConfigureEntityRecord, setPageConfigureEntityRecord] = useState<
@@ -19,39 +20,62 @@ export const Pages = React.memo((props: PageProps) => {
   >([
     {
       jjmc_order: 1,
+
       jjmc_pagestyle: 762670000,
+
       jjmc_backgroundimg: {
         fileName: "",
+
         fileSize: 14594,
+
         mimeType: "application/octet-stream",
+
         fileUrl: "",
+
         thumbnailUrl:
           "https://charm123.oss-cn-beijing.aliyuncs.com/OSS/www/-%20(1).png",
       },
+
       data: [
         "在这一年里",
+
         "你的AIFV上传率排名为xx",
+
         "策略达成率击败了%",
+
         "其中最佳完成策略为xx",
+
         "你的所有付出",
+
         "只为千万次最美律动",
       ],
     },
+
     {
       jjmc_order: 2,
+
       jjmc_pagestyle: 762670001,
+
       jjmc_backgroundimg: {
         fileName: "",
+
         fileSize: 10464,
+
         mimeType: "application/octet-stream",
+
         fileUrl: "",
+
         thumbnailUrl:
           "https://charm123.oss-cn-beijing.aliyuncs.com/OSS/www/-%20(1).png",
       },
+
       data: [
         "在这一年里",
+
         "一共覆盖了283家医院",
+
         "新开发的医院共计86家",
+
         "时间不会辜负努力",
       ],
     },
@@ -61,39 +85,37 @@ export const Pages = React.memo((props: PageProps) => {
   // console.log("columns", columns);
   // console.log("records", records);
 
-  // const handleClick = React.useCallback(async () => {
-  //   console.log("22222222211111");
-  //   const dom = document.getElementById("image-set");
-  //   handleShotDom(dom);
-  //   // if (dom) {
-  //   //   const imageBase64 = await html2canvas(dom, { useCORS: true }).then(
-  //   //     function (canvas) {
-  //   //       console.log(canvas);
-  //   //       const outputBase = canvas
-  //   //         .toDataURL("image/jpeg")
-  //   //         .replace("image/jpeg", "image/octet-stream");
-  //   //       return outputBase;
-  //   //     }
-  //   //   );
-  //   //   console.log(imageBase64);
-  //   //   const link = document.createElement("a");
-  //   //   link.href = imageBase64;
-  //   //   link.download = "download.png";
-  //   //   link.click();
-  //   // }
-
-  //   const url =
-  //     "https://prod-05.chinaeast2.logic.azure.cn:443/workflows/5886fa13499649c2afd234b9c3c79f6f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=efMCSpfEhpWf0PA4u1oCZLt7zWjlN6r0A38ChB-2RHI";
-
-  //   httpRequest = new XMLHttpRequest();
-  //   if (!httpRequest) {
-  //     alert("放弃了 :( 不能创建 XMLHTTP 实例");
-  //     return false;
-  //   }
-  //   httpRequest.onreadystatechange = alertContents;
-  //   httpRequest.open("POST", url);
-  //   httpRequest.send();
-  // }, []);
+  const handleClick = React.useCallback(async () => {
+    // console.log("22222222211111");
+    // const dom = document.getElementById("image-set");
+    // handleShotDom(dom);
+    // // if (dom) {
+    // //   const imageBase64 = await html2canvas(dom, { useCORS: true }).then(
+    // //     function (canvas) {
+    // //       console.log(canvas);
+    // //       const outputBase = canvas
+    // //         .toDataURL("image/jpeg")
+    // //         .replace("image/jpeg", "image/octet-stream");
+    // //       return outputBase;
+    // //     }
+    // //   );
+    // //   console.log(imageBase64);
+    // //   const link = document.createElement("a");
+    // //   link.href = imageBase64;
+    // //   link.download = "download.png";
+    // //   link.click();
+    // // }
+    // const url =
+    //   "https://prod-05.chinaeast2.logic.azure.cn:443/workflows/5886fa13499649c2afd234b9c3c79f6f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=efMCSpfEhpWf0PA4u1oCZLt7zWjlN6r0A38ChB-2RHI";
+    // httpRequest = new XMLHttpRequest();
+    // if (!httpRequest) {
+    //   alert("放弃了 :( 不能创建 XMLHTTP 实例");
+    //   return false;
+    // }
+    // httpRequest.onreadystatechange = alertContents;
+    // httpRequest.open("POST", url);
+    // httpRequest.send();
+  }, []);
 
   const alertContents = () => {
     try {
@@ -112,12 +134,11 @@ export const Pages = React.memo((props: PageProps) => {
 
   const handleMusic = () => {
     setPauseMusic(!isPauseMusic);
-    console.log("isPauseMusic666", isPauseMusic);
   };
 
   const sound = new Howl({
     src: [
-      "https://charm123.oss-cn-beijing.aliyuncs.com/OSS/www/P301624281166438.mp3",
+      "https://charm123.oss-cn-beijing.aliyuncs.com/OSS/www/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E6%9E%AB%20(Live).mp3",
     ],
     autoplay: true,
     loop: true,
@@ -127,18 +148,20 @@ export const Pages = React.memo((props: PageProps) => {
     },
   });
 
-
   useEffect(() => {
-    console.log(99999999);
-    sound.play();
-  }, []);
-
-  useEffect(() => {
-    const id = sound.play();
-    console.log("id", id);
     console.log("isPauseMusic", isPauseMusic);
-    if (isPauseMusic) {
-      sound.pause(id);
+    console.log(3333);
+    if (!isPauseMusic) {
+      console.log(9999998);
+      const id = sound.play();
+      console.log("id", id)
+      if (playIdRef.current === undefined) {
+        playIdRef.current = id;
+      }
+    } else {
+      console.log(" playIdRef.current", playIdRef.current);
+
+      sound.pause(playIdRef.current);
     }
   }, [isPauseMusic]);
 
@@ -157,33 +180,50 @@ export const Pages = React.memo((props: PageProps) => {
       wantArray.push(obj);
     });
 
-    // console.log("wantArray", wantArray);
-    // setPageConfigureEntityRecord(wantArray);
+    const addDataArray = wantArray.map((item, index) => {
+      if (item.jjmc_order === 1) {
+        return {
+          ...item,
+          data: [
+            "在这一年里",
+
+            "你的AIFV上传率排名为xx",
+
+            "策略达成率击败了%",
+
+            "其中最佳完成策略为xx",
+
+            "你的所有付出",
+
+            "只为千万次最美律动",
+          ],
+        };
+      } else if (item.jjmc_order === 2) {
+        return {
+          ...item,
+          data: [
+            "在这一年里",
+
+            "一共覆盖了283家医院",
+
+            "新开发的医院共计86家",
+
+            "时间不会辜负努力",
+          ],
+        };
+      }
+    });
+    console.log("wantArray", wantArray);
+    console.log("addDataArray", addDataArray);
+    // setPageConfigureEntityRecord(addDataArray);
   }, [records, columns]);
 
   // console.log("pageConfigureEntityRecord8888", pageConfigureEntityRecord);
 
-  // useEffect(() => {
-  //   pageConfigureEntityRecord.forEach((element, pageIndex) => {
-  //     element.data.forEach((_item, index) => {
-  //       console.log("pageIndex", pageIndex);
-  //       let contextContentById = document.getElementById(
-  //         `textContent${pageIndex}`
-  //       );
-  //       if (contextContentById) {
-  //         const text = contextContentById.getElementsByClassName("text-row");
-  //         console.log("text", text);
-  //         // @ts-ignore
-  //         text.item(index).style.animationDelay = `${index * 2}s`;
-  //       }
-  //     });
-  //   });
-  // }, []);
-
   return (
     <div
       style={{ width: "100%", height: "auto" }}
-      // onClick={handleClick}
+      onClick={handleClick}
       id="image-set"
     >
       <Swiper
