@@ -16,7 +16,9 @@
     "@fluentui/react": "^8.111.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "swiper": "^10.3.1"
+    "swiper": "^10.3.1",
+    "howler": "^2.2.4",
+    "html2canvas": "^1.0.0-rc.5"
   },
   "devDependencies": {
     "@microsoft/eslint-plugin-power-apps": "^0.2.6",
@@ -30,8 +32,6 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.1",
-    "howler": "^2.2.4",
-    "html2canvas": "^1.0.0-rc.5",
     "pcf-scripts": "^1",
     "pcf-start": "^1",
     "typescript": "^4.8.4"
