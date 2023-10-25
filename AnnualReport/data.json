@@ -1,0 +1,184 @@
+[
+  [
+    [
+      {
+        "label": "在这一年里",
+        "color": "#291B18",
+        "fontSize": "24px",
+        "fontWeight": "550",
+        "marginBottom": "16px"
+      }
+    ],
+    [
+      {
+        "label": "你的AIFV上传率排名为",
+        "color": "#291B18",
+        "fontSize": "24px",
+        "fontWeight": "550",
+        "marginBottom": "16px"
+
+      },
+      {
+        "label": "XXX",
+        "color": "#291B18",
+        "fontSize": "30px",
+        "fontWeight": "600",
+        "marginBottom": "16px"
+      }
+    ],
+    [
+      {
+        "label": "总台数超过全国平均台数",
+        "color": "#291B18",
+        "fontSize": "24px",
+        "fontWeight": "550"
+      }
+    ],
+    [
+      {
+        "label": "100台",
+        "color": "#291B18",
+        "fontSize": "30px",
+        "fontWeight": "600"
+      }
+    ],
+    [
+      {
+        "label": "其中",
+        "color": "#291B18",
+        "fontSize": "24px",
+        "fontWeight": "550"
+      },
+      {
+        "label": "6月份",
+        "color": "#291B18",
+        "fontSize": "30px",
+        "fontWeight": "600"
+      },
+      {
+        "label": "跟台数量最多",
+        "color": "#291B18",
+        "fontSize": "24px",
+        "fontWeight": "550"
+      }
+    ],
+
+    [
+      {
+        "label": "其中你最擅长的类型是",
+        "color": "#291B18",
+        "fontSize": "24px",
+        "fontWeight": "550"
+      },
+      {
+        "label": "房颤",
+        "color": "#291B18",
+        "fontSize": "30px",
+        "fontWeight": "600"
+      }
+    ],
+    [
+      {
+        "label": "专业立身",
+        "color": "#291B18",
+        "fontSize": "30px",
+        "fontWeight": "600"
+      },
+      {
+        "label": "不断成长",
+        "color": "#291B18",
+        "fontSize": "24px",
+        "fontWeight": "550"
+      }
+    ]
+  ],
+  [
+    [
+      {
+        "label": "你今年",
+        "color": "#291B18",
+        "fontSize": "24px",
+        "fontWeight": "550"
+      }
+    ],
+    [
+      {
+        "label": "跟台时间共计",
+        "color": "#291B18",
+        "fontSize": "24px",
+        "fontWeight": "550"
+      },
+      {
+        "label": "200天",
+        "color": "#291B18",
+        "fontSize": "30px",
+        "fontWeight": "600"
+      }
+    ],
+    [
+      {
+        "label": "总台数超过全国平均台数",
+        "color": "#291B18",
+        "fontSize": "24px",
+        "fontWeight": "550"
+      }
+    ],
+    [
+      {
+        "label": "100台",
+        "color": "#291B18",
+        "fontSize": "30px",
+        "fontWeight": "600"
+      }
+    ],
+    [
+      {
+        "label": "其中",
+        "color": "#291B18",
+        "fontSize": "24px",
+        "fontWeight": "550"
+      },
+      {
+        "label": "6月份",
+        "color": "#291B18",
+        "fontSize": "30px",
+        "fontWeight": "600"
+      },
+      {
+        "label": "跟台数量最多",
+        "color": "#291B18",
+        "fontSize": "24px",
+        "fontWeight": "550"
+      }
+    ],
+
+    [
+      {
+        "label": "其中你最擅长的类型是",
+        "color": "#291B18",
+        "fontSize": "24px",
+        "fontWeight": "550"
+      },
+      {
+        "label": "房颤",
+        "color": "#291B18",
+        "fontSize": "30px",
+        "fontWeight": "600"
+      }
+    ],
+    [
+      {
+        "label": "专业立身",
+        "color": "#291B18",
+        "fontSize": "30px",
+        "fontWeight": "600"
+      },
+      {
+        "label": "不断成长",
+        "color": "#291B18",
+        "fontSize": "24px",
+        "fontWeight": "550"
+      }
+    ]
+  ]
+]
