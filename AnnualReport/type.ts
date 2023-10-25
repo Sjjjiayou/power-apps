@@ -6,5 +6,9 @@ export interface PageProps {
     string,
     ComponentFramework.PropertyHelper.DataSetApi.EntityRecord
   >;
-  handleShotDom: (dom: HTMLElement | null) => void;
+  dateConfigSet: any;
+  data: Record<
+    string,
+    ComponentFramework.PropertyHelper.DataSetApi.EntityRecord
+  >;
 }

@@ -1,10 +1,27 @@
-.slide-position {
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+
+.slide-img-position {
   position: relative;
+  object-fit: contain;
 }
 
 .text-container {
   position: absolute;
-  top: 120px;
+  top: 150px;
   left: 20px;
   display: flex;
   flex-direction: column;
@@ -18,17 +35,20 @@
   font-size: 18px;
   display: flex;
   opacity: 0;
-  animation: fadeIn 0.5s ease-in-out forwards;
+  margin-bottom: 4px;
+  animation: fadeIn 1s ease-in-out forwards;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateX(-50%);
+    /* transform: translateY(0); */
+    transform: translateY(-50%);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    /* transform: translateY(-50%); */
+    transform: translateY(0);
   }
 }
 
@@ -63,21 +83,3 @@
     transform: rotate(360deg);
   }
 }
-/* 
-.top-element-position {
-  position: absolute;
-  top: 80px;
-}
-
-.cloud-img {
-  animation: 3s linear 1s infinite alternate slideIn;
-}
-
-@keyframes slideIn {
-  from {
-    margin-left: 0%;
-  }
-  to {
-    margin-left: 100%;
-  }
-} */
