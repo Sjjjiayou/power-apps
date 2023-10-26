@@ -17,6 +17,11 @@ export class AnnualReport
   data: {
     [id: string]: ComponentFramework.PropertyHelper.DataSetApi.EntityRecord;
   };
+  style1TopPosition: string;
+  style1LeftPosition: string;
+  style2TopPosition: string;
+  style2LeftPosition: string;
+
   /**
    * Empty constructor.
    */
@@ -67,7 +72,23 @@ export class AnnualReport
        this.data = dateConfigSet.records;
     }
 
-    console.log("dateConfigSet", dateConfigSet)
+    if (context.parameters.Style1TopPosition.raw) {
+      this.style1TopPosition = context.parameters.Style1TopPosition.raw
+    }
+
+    if (context.parameters.Style1LeftPosition.raw) {
+      this.style1LeftPosition = context.parameters.Style1LeftPosition.raw
+    }
+
+    if (context.parameters.Style2TopPosition.raw) {
+      this.style2TopPosition = context.parameters.Style2TopPosition.raw
+    }
+
+    if (context.parameters.Style2LeftPosition.raw) {
+      this.style2LeftPosition = context.parameters.Style2LeftPosition.raw
+    }
+
+    // console.log("dateConfigSet", dateConfigSet)
 
     ReactDOM.render(
       React.createElement(Pages, {
@@ -76,7 +97,11 @@ export class AnnualReport
         columns: dataset.columns,
         records: this.records,
         data: this.data,
-        dateConfigSet: dateConfigSet
+        dateConfigSet: dateConfigSet,
+        style1TopPosition: this.style1TopPosition,
+        style1LeftPosition: this.style1LeftPosition,
+        style2TopPosition: this.style2TopPosition,
+        style2LeftPosition: this.style2LeftPosition
       }),
       this.container
     );

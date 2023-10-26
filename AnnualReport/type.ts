@@ -11,4 +11,8 @@ export interface PageProps {
     string,
     ComponentFramework.PropertyHelper.DataSetApi.EntityRecord
   >;
+  style1TopPosition: string;
+  style1LeftPosition: string;
+  style2TopPosition: string;
+  style2LeftPosition: string;
 }

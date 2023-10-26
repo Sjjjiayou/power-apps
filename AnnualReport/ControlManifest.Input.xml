@@ -24,22 +24,13 @@
     <data-set name="data" display-name-key="dataSetProperty">
       <property-set name="DataIndicator" display-name-key="DataIndicator_Key" description-key="DataIndicator_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
     </data-set>
+    <property name="Style1TopPosition" display-name-key="Property_Style1TopPosition" description-key="Property_Style1TopPosition" of-type="SingleLine.Text" usage="bound" required="true" default-value="150"/>
+    <property name="Style1LeftPosition" display-name-key="Property_Style1LeftPosition" description-key="Property_Style1LeftPosition" of-type="SingleLine.Text" usage="bound" required="true" default-value="24"/>
+    <property name="Style2TopPosition" display-name-key="Property_Style2TopPosition" description-key="Property_Style2TopPosition" of-type="SingleLine.Text" usage="bound" required="true" default-value="300"/>
+    <property name="Style2LeftPosition" display-name-key="Property_Style2LeftPosition" description-key="Property_Style2LeftPosition" of-type="SingleLine.Text" usage="bound" required="true" default-value="24"/>
     <resources>
       <code path="index.ts" order="1"/>
       <css path="css/AnnualReport.css" order="1" />
-      <!-- <resx path="strings/AnnualReport.1033.resx" version="1.0.0" /> -->
     </resources>
-    <!-- UNCOMMENT TO ENABLE THE SPECIFIED API
-    <feature-usage>
-      <uses-feature name="Device.captureAudio" required="true" />
-      <uses-feature name="Device.captureImage" required="true" />
-      <uses-feature name="Device.captureVideo" required="true" />
-      <uses-feature name="Device.getBarcodeValue" required="true" />
-      <uses-feature name="Device.getCurrentPosition" required="true" />
-      <uses-feature name="Device.pickFile" required="true" />
-      <uses-feature name="Utility" required="true" />
-      <uses-feature name="WebAPI" required="true" />
-    </feature-usage>
-    -->
   </control>
 </manifest>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { PageProps } from "./type";
 import "swiper/css";
@@ -10,8 +10,19 @@ import { EffectFade } from "swiper/modules";
 import classNames from "classnames";
 
 export const Pages = React.memo((props: PageProps) => {
-  const { width, height, columns, records, dateConfigSet, data } = props;
-  console.log(111111);
+  const {
+    width,
+    height,
+    columns,
+    records,
+    dateConfigSet,
+    data,
+    style1LeftPosition,
+    style1TopPosition,
+    style2LeftPosition,
+    style2TopPosition,
+  } = props;
+  console.log(3333);
   console.log("records", records);
   console.log("columns", columns);
 
@@ -19,29 +30,32 @@ export const Pages = React.memo((props: PageProps) => {
   const [pageConfigureEntityRecord, setPageConfigureEntityRecord] = useState<
     any[]
   >([]);
+
   const [pageTextData, setPageTextData] = useState("");
   const [pageConfig, setPageConfig] = useState("");
 
   useEffect(() => {
-    setTimeout(() => {
-      if (dateConfigSet.sortedRecordIds.length > 0) {
-        console.log(44444);
-        const dataJson =
-          data[dateConfigSet.sortedRecordIds[0]].getValue("jjmc_datajson");
-        const pageJson =
-          data[dateConfigSet.sortedRecordIds[0]].getValue("jjmc_pagejson");
-        if (dataJson) {
-          setPageTextData(dataJson as string);
-        }
 
-        console.log("dataJson55", dataJson);
-        console.log("pageJson55", pageJson);
-
-        if (pageJson) {
-          setPageConfig(pageJson as string);
-        }
+    console.log("dateConfigSet.sortedRecordIds", dateConfigSet.sortedRecordIds)
+    
+    if (dateConfigSet.sortedRecordIds.length > 0) {
+      console.log(44444);
+      console.log(" data[dateConfigSet.sortedRecordIds[0]]",  data[dateConfigSet.sortedRecordIds[0]])
+      const dataJson =
+        data[dateConfigSet.sortedRecordIds[0]]?.getValue("jjmc_datajson");
+      const pageJson =
+        data[dateConfigSet.sortedRecordIds[0]]?.getValue("jjmc_pagejson");
+      if (dataJson) {
+        setPageTextData(dataJson as string);
       }
-    }, 200);
+
+      console.log("dataJson55", dataJson);
+      console.log("pageJson55", pageJson);
+
+      if (pageJson) {
+        setPageConfig(pageJson as string);
+      }
+    }
   }, [dateConfigSet, data]);
 
   useEffect(() => {
@@ -75,7 +89,9 @@ export const Pages = React.memo((props: PageProps) => {
         };
       });
       console.log("pageConfigEntityRecord", pageConfigEntityRecord);
-      setPageConfigureEntityRecord(pageConfigEntityRecord);
+      if (pageConfigEntityRecord.length > 0) {
+        setPageConfigureEntityRecord(pageConfigEntityRecord);
+      }
     }
   }, [records, columns, pageConfig, pageTextData]);
 
@@ -110,24 +126,33 @@ export const Pages = React.memo((props: PageProps) => {
               className="slide-img-position"
               alt="config-img"
             />
-            <div className="text-container" id={`textContent${index}`}>
+            <div
+              className="text-container"
+              style={{
+                top:
+                  item?.jjmc_pagestyle === 762670000
+                    ? `${style1TopPosition + "px"}`
+                    : `${style2TopPosition + "px"}`,
+                left:
+                  item?.jjmc_pagestyle === 762670000
+                    ? `${style1LeftPosition + "px"}`
+                    : `${style2LeftPosition + "px"}`,
+              }}
+            >
               {item?.data.map((value, rowIndex) => {
                 return (
-                  <div
-                    className={classNames({ "text-row": isSlide })}
-                    style={{
-                      animationDelay: `${rowIndex * 0.8}s`,
-                    }}
-                    key={rowIndex}
-                  >
+                  <div className="text-row" key={rowIndex}>
                     {value.map((row, index) => {
                       return (
                         <span
                           key={index}
+                          className={classNames({ "text-span": isSlide })}
                           style={{
                             color: row.color,
                             fontSize: row.fontSize,
                             fontWeight: row.fontWeight,
+                            marginBottom: row.marginBottom,
+                            animationDelay: row.delaySeconds,
                           }}
                         >
                           {row.label}
@@ -139,6 +164,7 @@ export const Pages = React.memo((props: PageProps) => {
               })}
             </div>
             <div className="music-position">
+              1h
               <img
                 src="https://charm123.oss-cn-beijing.aliyuncs.com/OSS/www/music1.png"
                 alt="musicPng"
