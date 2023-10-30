@@ -1,33 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="SampleNamespace" constructor="AnnualReport" version="1.0.6" display-name-key="AnnualReport" description-key="AnnualReport description" control-type="standard">
-    <!--external-service-usage node declares whether this 3rd party PCF control is using external service or not, if yes, this control will be considered as premium and please also add the external domain it is using.
-    If it is not using any external service, please set the enabled="false" and DO NOT add any domain below. The "enabled" will be false by default.
-    Example1:
-      <external-service-usage enabled="true">
-        <domain>www.Microsoft.com</domain>
-      </external-service-usage>
-    Example2:
-      <external-service-usage enabled="false">
-      </external-service-usage>
-    -->
-    <external-service-usage enabled="false">
-      <!--UNCOMMENT TO ADD EXTERNAL DOMAINS
-      <domain></domain>
-      <domain></domain>
-      -->
-    </external-service-usage>
+  <control namespace="SampleNamespace" constructor="AnnualReport" version="1.0.8" display-name-key="AnnualReport" description-key="AnnualReport description" control-type="standard">
     <!-- dataset node represents a set of entity records on CDS; allow more than one datasets -->
-    <data-set name="records" display-name-key="sampleDataSetProperty">
-      <property-set name="RecordsIndicator" display-name-key="RecordsIndicator_Key" description-key="DRecordsIndicator_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
+    <data-set name="PageCongigRecords" display-name-key="PageCongigRecordsProperty">
+      <property-set name="RecordsIndicator" display-name-key="RecordsIndicator_Key" description-key="RecordsIndicator_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
     </data-set>
     <data-set name="data" display-name-key="dataSetProperty">
       <property-set name="DataIndicator" display-name-key="DataIndicator_Key" description-key="DataIndicator_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
     </data-set>
-    <property name="Style1TopPosition" display-name-key="Property_Style1TopPosition" description-key="Property_Style1TopPosition" of-type="SingleLine.Text" usage="bound" required="true" default-value="150"/>
-    <property name="Style1LeftPosition" display-name-key="Property_Style1LeftPosition" description-key="Property_Style1LeftPosition" of-type="SingleLine.Text" usage="bound" required="true" default-value="24"/>
-    <property name="Style2TopPosition" display-name-key="Property_Style2TopPosition" description-key="Property_Style2TopPosition" of-type="SingleLine.Text" usage="bound" required="true" default-value="300"/>
-    <property name="Style2LeftPosition" display-name-key="Property_Style2LeftPosition" description-key="Property_Style2LeftPosition" of-type="SingleLine.Text" usage="bound" required="true" default-value="24"/>
+    <property name="DataJson" display-name-key="Property_DataJson" description-key="Property_DataJson" of-type="SingleLine.Text" usage="bound" required="true" />
+    <property name="PageJson" display-name-key="Property_PageJson" description-key="Property_PageJson" of-type="SingleLine.Text" usage="bound" required="true" />
+    <property name="MusicRotateIconTopPosition" display-name-key="Property_MusicRotateIconTopPosition" description-key="Property_MusicRotateIconTopPosition" of-type="SingleLine.Text" usage="bound" required="true" default-value="80"/>
+    <property name="MusicRotateIconRightPosition" display-name-key="Property_MusicRotateIconRightPosition" description-key="Property_MusicRotateIconRightPosition" of-type="SingleLine.Text" usage="bound" required="true" default-value="20"/>
     <resources>
       <code path="index.ts" order="1"/>
       <css path="css/AnnualReport.css" order="1" />

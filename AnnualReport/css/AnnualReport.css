@@ -53,12 +53,6 @@
   }
 }
 
-.music-position {
-  position: absolute;
-  top: 80px;
-  right: 20px;
-}
-
 .music-img {
   animation: loop 2s linear infinite;
 }

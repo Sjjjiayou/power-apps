@@ -14,13 +14,10 @@ export class AnnualReport
   records: {
     [id: string]: ComponentFramework.PropertyHelper.DataSetApi.EntityRecord;
   };
-  data: {
-    [id: string]: ComponentFramework.PropertyHelper.DataSetApi.EntityRecord;
-  };
-  style1TopPosition: string;
-  style1LeftPosition: string;
-  style2TopPosition: string;
-  style2LeftPosition: string;
+  dataJsonConfig: string;
+  pageJsonConfig: string;
+  musicRotateIconTopPosition: string;
+  musicRotateIconRightPosition: string;
 
   /**
    * Empty constructor.
@@ -55,8 +52,7 @@ export class AnnualReport
   public updateView(context: ComponentFramework.Context<IInputs>): void {
     // Add code to update control view
     console.log("context", context);
-    const dataset = context.parameters.records;
-    const dateConfigSet = context.parameters.data;
+    const dataset = context.parameters.PageCongigRecords;
     const datasetChanged = context.updatedProperties.indexOf("dataset") > -1;
 
     // The test harness provides width/height as strings
@@ -67,42 +63,39 @@ export class AnnualReport
       context.mode.allocatedHeight as unknown as string
     );
 
-     if (datasetChanged || this.isTestHarness) {
-       this.records = dataset.records;
-       this.data = dateConfigSet.records;
+    if (datasetChanged || this.isTestHarness) {
+      this.records = dataset.records;
     }
 
-    if (context.parameters.Style1TopPosition.raw) {
-      this.style1TopPosition = context.parameters.Style1TopPosition.raw
+    if (context.parameters.DataJson.raw) {
+      this.dataJsonConfig = context.parameters.DataJson.raw
     }
 
-    if (context.parameters.Style1LeftPosition.raw) {
-      this.style1LeftPosition = context.parameters.Style1LeftPosition.raw
+    if (context.parameters.PageJson.raw) {
+      this.pageJsonConfig = context.parameters.PageJson.raw
     }
 
-    if (context.parameters.Style2TopPosition.raw) {
-      this.style2TopPosition = context.parameters.Style2TopPosition.raw
+    if (context.parameters.MusicRotateIconTopPosition.raw) {
+      this.musicRotateIconTopPosition = context.parameters.MusicRotateIconTopPosition.raw
     }
 
-    if (context.parameters.Style2LeftPosition.raw) {
-      this.style2LeftPosition = context.parameters.Style2LeftPosition.raw
+    if (context.parameters.MusicRotateIconRightPosition.raw) {
+      this.musicRotateIconRightPosition = context.parameters.MusicRotateIconRightPosition.raw
     }
-
-    // console.log("dateConfigSet", dateConfigSet)
 
     ReactDOM.render(
-      React.createElement(Pages, {
-        width: allocatedWidth,
-        height: allocatedHeight,
-        columns: dataset.columns,
-        records: this.records,
-        data: this.data,
-        dateConfigSet: dateConfigSet,
-        style1TopPosition: this.style1TopPosition,
-        style1LeftPosition: this.style1LeftPosition,
-        style2TopPosition: this.style2TopPosition,
-        style2LeftPosition: this.style2LeftPosition
-      }),
+      this.records &&
+        dataset.columns &&
+        React.createElement(Pages, {
+          width: allocatedWidth,
+          height: allocatedHeight,
+          columns: dataset.columns,
+          dataJsonConfig: this.dataJsonConfig,
+          pageJsonConfig: this.pageJsonConfig,
+          records: this.records,
+          musicRotateIconTopPosition: this.musicRotateIconTopPosition,
+          musicRotateIconRightPosition: this.musicRotateIconRightPosition
+        }),
       this.container
     );
   }
