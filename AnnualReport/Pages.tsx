@@ -4,10 +4,10 @@ import { PageProps } from "./type";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "./css/AnnualReport.css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import { EffectFade } from "swiper/modules";
 import classNames from "classnames";
+import { getPPElementSize, getPPFontSize, mockData } from "./constant";
+import SlideNextButton from "./hooks/use-swiper-hook";
 
 export const Pages = React.memo((props: PageProps) => {
   const {
@@ -17,440 +17,29 @@ export const Pages = React.memo((props: PageProps) => {
     records,
     dataJsonConfig,
     pageJsonConfig,
-    musicRotateIconTopPosition,
-    musicRotateIconRightPosition,
+    appWidthRate = 1,
+    appHeightRate = 1,
+    buttonFirstTextLeft,
+    buttonFirstImgBottom,
+    buttonFirstImgLeft,
+    buttonFirstTextBottom,
+    buttonEndTextLeft,
+    buttonEndImgBottom,
+    buttonEndImgLeft,
+    buttonEndTextBottom,
+    buttonEndTextSize,
+    buttonFirstWidth,
+    buttonFirstHeight,
+    buttonEndWidth,
+    buttonEndHeight,
+    handleIsFirstLastPage,
   } = props;
 
-  const [slideActiveIndex, setSlideActiveIndex] = useState(0);
   const [isSlide, setSlide] = useState(true);
 
   const [pageConfigureEntityRecord, setPageConfigureEntityRecord] = useState<
     any[]
-  >([
-    {
-      jjmc_order: 0,
-      jjmc_pagestyle: 762670000,
-      jjmc_backgroundimg: {
-        fileName: "",
-
-        fileSize: 9519,
-
-        mimeType: "application/octet-stream",
-
-        fileUrl: "",
-
-        thumbnailUrl:
-          "https://charm123.oss-cn-beijing.aliyuncs.com/OSS/www/%E8%83%8C%E6%99%AF%E5%9B%BE1.png",
-      },
-
-      data: [
-        [
-          {
-            label: "还记得 ",
-
-            color: "#3D2820",
-
-            fontSize: "17px",
-
-            fontWeight: "500",
-
-            margin: "0px 0px 24px 24px",
-            delaySeconds: "0.8s",
-          },
-          {
-            label: "2022年1月3日",
-
-            color: "#C67B24",
-
-            fontSize: "22px",
-
-            fontWeight: "700",
-            margin: "0px 0px 24px 0px",
-            delaySeconds: "0.8s",
-          },
-          {
-            label: "吗？",
-
-            color: "#3D2820",
-
-            fontSize: "17px",
-
-            fontWeight: "500",
-
-            margin: "0px 0px 24px 0px",
-            delaySeconds: "0.8s",
-          },
-        ],
-        [
-          {
-            label: "这是你第一次打开行稳致远的日子",
-
-            color: "#3D2820",
-
-            fontSize: "17px",
-
-            fontWeight: "500",
-
-            margin: "0px 0px 6px 24px",
-            delaySeconds: "2.4s",
-          },
-        ],
-        [
-          {
-            label: "截至今天，已经过去",
-
-            color: "#3D2820",
-
-            fontSize: "17px",
-
-            fontWeight: "500",
-
-            margin: "0px 0px 24px 24px",
-            delaySeconds: "3.2s",
-          },
-          {
-            label: "1134天",
-
-            color: "#C67B24",
-
-            fontSize: "22px",
-
-            fontWeight: "700",
-            margin: "0px 0px 24px 0px",
-            delaySeconds: "3.2s",
-          },
-        ],
-
-        [
-          {
-            label: "今年上线了很多功能：",
-
-            color: "#3D2820",
-
-            fontSize: "17px",
-
-            fontWeight: "500",
-
-            margin: "0px 0px 6px 24px",
-            delaySeconds: "4.8s",
-          },
-          {
-            label: "术者旅程、客户",
-
-            color: "#C67B24",
-
-            fontSize: "22px",
-
-            fontWeight: "700",
-            margin: "0px 0px 6px 0px",
-            delaySeconds: "4.8s",
-          },
-        ],
-        [
-          {
-            label: " 管理、我想找到你、飞虎队填岗、",
-
-            color: "#C67B24",
-
-            fontSize: "22px",
-
-            fontWeight: "700",
-            margin: "0px 0px 6px 24px",
-            delaySeconds: "5.6s",
-          },
-        ],
-        [
-          {
-            label: " 设备管理",
-
-            color: "#C67B24",
-
-            fontSize: "22px",
-
-            fontWeight: "700",
-            margin: "0px 0px 6px 24px",
-            delaySeconds: "6.4s",
-          },
-          {
-            label: "等",
-
-            color: "#3D2820",
-
-            fontSize: "17px",
-
-            fontWeight: "500",
-
-            margin: "0px 0px 6px 0px",
-            delaySeconds: "6.4s",
-          },
-        ],
-        [
-          {
-            label: "你最爱访问的模块是 ",
-
-            color: "#3D2820",
-
-            fontSize: "17px",
-
-            fontWeight: "500",
-
-            margin: "0px 0px 24px 24px",
-            delaySeconds: "7.2s",
-          },
-          {
-            label: "策略宝",
-
-            color: "#C67B24",
-
-            fontSize: "22px",
-
-            fontWeight: "700",
-            margin: "0px 0px 24px 0px",
-            delaySeconds: "7.2s",
-          },
-        ],
-        [
-          {
-            label: "'不断地迭代更新，只是为了更好地加持你",
-            color: "rgba(61, 40, 32, 0.68)",
-            fontSize: "17px",
-            fontWeight: "500",
-            delaySeconds: "8.8s",
-            margin: "0px 0px 4px 24px",
-          },
-        ],
-        [
-          {
-            label: "的日常工作'",
-            color: "rgba(61, 40, 32, 0.68)",
-            fontSize: "17px",
-            fontWeight: "500",
-            delaySeconds: "9.6s",
-            margin: "0px 0px 0px 24px",
-          },
-        ],
-      ],
-    },
-
-    {
-      jjmc_order: 11,
-
-      jjmc_pagestyle: 762670001,
-
-      jjmc_backgroundimg: {
-        fileName: "",
-
-        fileSize: 9519,
-
-        mimeType: "application/octet-stream",
-
-        fileUrl: "",
-
-        thumbnailUrl:
-          "https://charm123.oss-cn-beijing.aliyuncs.com/OSS/www/%E8%83%8C%E6%99%AF%E5%9B%BE2.png",
-      },
-      data: [
-        [
-          {
-            label: "今年，你的跟台时间共计 ",
-
-            color: "#3D2820",
-
-            fontSize: "17px",
-
-            fontWeight: "500",
-
-            margin: "0px 0px 8px 24px",
-            delaySeconds: "0.8s",
-          },
-          {
-            label: "220天",
-
-            color: "#C67B24",
-
-            fontSize: "22px",
-
-            fontWeight: "700",
-            margin: "0px 0px 8px 0px",
-            delaySeconds: "0.8s",
-          },
-        ],
-        [
-          {
-            label: "总台数超过全国平均 ",
-
-            color: "#3D2820",
-
-            fontSize: "17px",
-
-            fontWeight: "500",
-
-            margin: "0px 0px 8px 24px",
-            delaySeconds: "1.6s",
-          },
-          {
-            label: "78%",
-
-            color: "#C67B24",
-
-            fontSize: "22px",
-
-            fontWeight: "700",
-            margin: "0px 0px 8px 0px",
-            delaySeconds: "1.6s",
-          },
-        ],
-        [
-          {
-            label: "你最擅长的术式是 ",
-
-            color: "#3D2820",
-
-            fontSize: "17px",
-
-            fontWeight: "500",
-
-            margin: "0px 0px 30px 24px",
-            delaySeconds: "2.4s",
-          },
-          {
-            label: "房颤",
-
-            color: "#C67B24",
-
-            fontSize: "22px",
-
-            fontWeight: "700",
-            margin: "0px 0px 30px 0px",
-            delaySeconds: "2.4s",
-          },
-        ],
-        [
-          {
-            label: "'一整年你都在守护着最美律动，感谢每次",
-            color: "rgba(61, 40, 32, 0.68)",
-            fontSize: "17px",
-            fontWeight: "500",
-            delaySeconds: "4s",
-            margin: "0px 0px 4px 24px",
-          },
-        ],
-        [
-          {
-            label: "窦律带来的惊喜'",
-            color: "rgba(61, 40, 32, 0.68)",
-            fontSize: "17px",
-            fontWeight: "500",
-            delaySeconds: "4s",
-            margin: "0px 0px 0px 24px",
-          },
-        ],
-      ],
-    },
-    {
-      jjmc_order: 2,
-
-      jjmc_pagestyle: 762670001,
-
-      jjmc_backgroundimg: {
-        fileName: "",
-
-        fileSize: 9519,
-
-        mimeType: "application/octet-stream",
-
-        fileUrl: "",
-
-        thumbnailUrl:
-          "https://charm123.oss-cn-beijing.aliyuncs.com/OSS/www/%E8%83%8C%E6%99%AF%E5%9B%BE3.png",
-      },
-      data: [
-        [
-          {
-            label: "6月份",
-
-            color: "#F28C38",
-
-            fontSize: "22px",
-
-            fontWeight: "600",
-
-            margin: "0px 0px 8px 24px",
-            delaySeconds: "0.8s",
-          },
-          {
-            label: "你的跟台数量最多",
-
-            color: "#FFF",
-
-            fontSize: "17px",
-
-            fontWeight: "400",
-            margin: "0px 0px 8px 0px",
-            delaySeconds: "0.8s",
-          },
-        ],
-        [
-          {
-            label: "其中最早传台时间是",
-
-            color: "#FFF",
-
-            fontSize: "17px",
-
-            fontWeight: "400",
-
-            margin: "0px 0px 8px 24px",
-            delaySeconds: "1.6s",
-          },
-          {
-            label: "7月21日06:35 ",
-
-            color: "#F28C38",
-
-            fontSize: "22px",
-
-            fontWeight: "600",
-
-            margin: "0px 0px 8px 0px",
-            delaySeconds: "1.6s",
-          },
-        ],
-        [
-          {
-            label: "最晚传台时间是",
-            color: "#FFF",
-            fontSize: "17px",
-            fontWeight: "400",
-            margin: "0px 0px 8px 24px",
-            delaySeconds: "2.4s",
-          },
-          {
-            label: "3月10日 12:35",
-
-            color: "#F28C38",
-
-            fontSize: "22px",
-
-            fontWeight: "600",
-
-            margin: "0px 0px 8px 0px",
-            delaySeconds: "2.4s",
-          },
-        ],
-        [
-          {
-            label: "'风雨兼程 你和术者一起守护着“心”的承诺'",
-            color: "#BFE9FF",
-            fontSize: "17px",
-            fontWeight: "500",
-            delaySeconds: "4s",
-            margin: "0px 0px 4px 24px",
-          },
-        ],
-      ],
-    },
-  ]);
+  >(mockData);
 
   useEffect(() => {
     let wantArray: any[] = [];
@@ -468,41 +57,46 @@ export const Pages = React.memo((props: PageProps) => {
         wantArray.push(obj);
       });
 
-    console.log("wantArray1111", wantArray);
-
     const addDataArray = wantArray.filter((item) =>
       pageJsonConfig.includes(item.jjmc_order)
     );
-    console.log("addDataArray", addDataArray);
 
-    const pageConfigEntityRecord = addDataArray.map((element, index) => {
-      const transform = JSON.parse(dataJsonConfig);
-      return {
-        ...element,
-        data: transform[index],
-      };
-    });
+    const pageConfigEntityRecord = addDataArray
+      .sort((a, b) => Number(a.jjmc_order) - Number(b.jjmc_order))
+      .map((element, index) => {
+        const transform = JSON.parse(dataJsonConfig);
+        return {
+          ...element,
+          data: transform[index],
+        };
+      });
+
     if (pageConfigEntityRecord.length > 0) {
       // setPageConfigureEntityRecord(pageConfigEntityRecord);
     }
   }, [records, columns, pageJsonConfig, dataJsonConfig]);
 
-  console.log("pageConfigureEntityRecord99999", pageConfigureEntityRecord);
-  console.log("dataJsonConfig-in", dataJsonConfig);
-  console.log("dataJsonConfig-in", dataJsonConfig);
-  console.log("isSlide", isSlide)
+  console.log("pageConfigureEntityRecord666444", pageConfigureEntityRecord);
 
-  console.log("slideActiveIndex", slideActiveIndex);
   return (
     <Swiper
+      style={{ height }}
       spaceBetween={30}
       effect={"fade"}
       direction={"vertical"}
       modules={[EffectFade]}
       className="mySwiper"
       onActiveIndexChange={(swiper) => {
-        console.log('swiper.activeIndex', swiper.activeIndex)
-        setSlideActiveIndex(swiper.activeIndex);
+        console.log("swiper.activeIndex", swiper.activeIndex);
+        const activeIndex = swiper.activeIndex;
+        // if (
+        //   activeIndex === 0 ||
+        //   activeIndex === pageConfigureEntityRecord.length - 1
+        // ) {
+        //   handleIsFirstLastPage(1);
+        // } else {
+        //   handleIsFirstLastPage(0);
+        // }
       }}
       onSlideChange={() => {
         setSlide(false);
@@ -511,29 +105,64 @@ export const Pages = React.memo((props: PageProps) => {
         }, 0);
       }}
     >
-      {pageConfigureEntityRecord.slice(0).map((item) => {
+      {pageConfigureEntityRecord.map((item, index, array) => {
         return (
-          <SwiperSlide key={item.jjmc_order}>
+          <SwiperSlide key={index}>
             <img
               style={{
-                height: height,
-                width: width,
+                height,
+                width,
               }}
-              // src={`data:image/png;base64,${item?.jjmc_backgroundimg?.fileContent}`}
-              // src={`'${item?.jjmc_backgroundimg?.thumbnailUrl}full=true'`}
-              src={`${item?.jjmc_backgroundimg?.thumbnailUrl}`}
+              src={item.jjmc_base64 || ""}
               className="slide-img-position"
-              alt="config-img"
+              alt="background-img"
             />
+            {item.jjmc_elementimg && (
+              <img
+                width="100%"
+                alt="element-img"
+                className={classNames({ "element-img": isSlide })}
+                style={{
+                  position: "absolute",
+                  bottom: item.jjmc_eleimgbottom,
+                  left: 0,
+                }}
+                src={item.jjmc_elementimg}
+              />
+            )}
+
+            {item.jjmc_slidepng && (
+              <img
+                width={getPPElementSize(appWidthRate, "70")}
+                height={getPPElementSize(appHeightRate, "38")}
+                alt="slide-icon"
+                className={classNames({ "slide-icon": isSlide })}
+                style={{
+                  position: "absolute",
+                  bottom: getPPElementSize(appHeightRate, "20"),
+                  left: getPPElementSize(appWidthRate, "140"),
+                  animationDelay: "1s",
+                }}
+                src={item.jjmc_slidepng}
+              />
+            )}
             <div
               className="text-container"
               style={{
-                top: "145px",
+                top: item.jjmc_distancetop
+                  ? getPPElementSize(appHeightRate, item.jjmc_distancetop)
+                  : "150px",
               }}
             >
-              {item?.data.map((value, rowIndex) => {
+              {item.data.map((value, rowIndex) => {
                 return (
-                  <div className="text-row" key={rowIndex}>
+                  <div
+                    className="text-row"
+                    key={rowIndex}
+                    style={{
+                      lineHeight: getPPElementSize(appHeightRate, "156", false),
+                    }}
+                  >
                     {value.map((row, index) => {
                       return (
                         <span
@@ -541,13 +170,20 @@ export const Pages = React.memo((props: PageProps) => {
                           className={classNames({ "text-span": isSlide })}
                           style={{
                             color: row.color,
-                            fontSize: row.fontSize,
+                            fontSize: getPPFontSize(appWidthRate, row.fontSize),
                             fontWeight: row.fontWeight,
-                            margin: row.margin,
+                            marginLeft: getPPElementSize(
+                              appWidthRate,
+                              row.marginLeft
+                            ),
+                            marginBottom: getPPElementSize(
+                              appHeightRate,
+                              row.marginBottom
+                            ),
                             animationDelay: row.delaySeconds,
                           }}
                         >
-                          {row.label}
+                          {row.isShowLabel ? row.label : ""}
                         </span>
                       );
                     })}
@@ -555,21 +191,59 @@ export const Pages = React.memo((props: PageProps) => {
                 );
               })}
             </div>
-            <div
-              style={{
-                position: "absolute",
-                top: `${musicRotateIconTopPosition + "px"}`,
-                right: `${musicRotateIconRightPosition + "px"}`,
-              }}
-            >
-              <img
-                src="https://charm123.oss-cn-beijing.aliyuncs.com/OSS/www/music1.png"
-                alt="musicPng"
-                width={35}
-                height={35}
-                className="music-img"
+            {item.jjmc_musicImg && (
+              <div
+                style={{
+                  width: getPPElementSize(appWidthRate, "35"),
+                  height: getPPElementSize(appHeightRate, "35"),
+                  top: getPPElementSize(appHeightRate, "80"),
+                  right: getPPElementSize(appWidthRate, "24"),
+                  position: "absolute",
+                }}
+              >
+                <img
+                  src={item.jjmc_musicImg}
+                  alt="musicPng"
+                  width="100%"
+                  height="100%"
+                  className="music-img"
+                />
+              </div>
+            )}
+            {item.jjmc_iconImg && item.jjmc_buttonImg && index === 0 && (
+              <SlideNextButton
+                width={Math.floor(Number(buttonFirstWidth) * appWidthRate)}
+                height={Math.floor(Number(buttonFirstHeight) * appHeightRate)}
+                buttonText={item.jjmc_buttonText}
+                buttonImg={item.jjmc_buttonImg}
+                appWidthRate={appWidthRate}
+                appHeightRate={appHeightRate}
+                buttonImgBottom={buttonFirstImgBottom}
+                buttonImgLeft={buttonFirstImgLeft}
+                buttonTextBottom={buttonFirstTextBottom}
+                buttonTextLeft={buttonFirstTextLeft}
+                slideToPageIndex={1}
+                iconImg={item.jjmc_iconImg}
               />
-            </div>
+            )}
+            {item.jjmc_buttonText &&
+              item.jjmc_buttonImg &&
+              index === array.length - 1 && (
+                <SlideNextButton
+                  width={Math.floor(Number(buttonEndWidth) * appWidthRate)}
+                  height={Math.floor(Number(buttonEndHeight) * appHeightRate)}
+                  buttonText={item.jjmc_buttonText}
+                  buttonImg={item.jjmc_buttonImg}
+                  appWidthRate={appWidthRate}
+                  appHeightRate={appHeightRate}
+                  buttonImgBottom={buttonEndImgBottom}
+                  buttonImgLeft={buttonEndImgLeft}
+                  buttonTextBottom={buttonEndTextBottom}
+                  buttonTextLeft={buttonEndTextLeft}
+                  buttonTextSize={buttonEndTextSize}
+                  slideToPageIndex={0}
+                />
+              )}
           </SwiperSlide>
         );
       })}

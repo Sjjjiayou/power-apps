@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import { Pages } from "./Pages";
 
@@ -14,10 +15,25 @@ export class AnnualReport
   records: {
     [id: string]: ComponentFramework.PropertyHelper.DataSetApi.EntityRecord;
   };
+  handleIsFirstLastPage: (value: number) => void;
+  isFirstLastPages: boolean;
   dataJsonConfig: string;
   pageJsonConfig: string;
-  musicRotateIconTopPosition: string;
-  musicRotateIconRightPosition: string;
+  appWidthRate: number;
+  appHeightRate: number;
+  buttonFirstWidth: string;
+  buttonFirstHeight: string;
+  buttonEndWidth: string;
+  buttonEndHeight: string;
+  buttonFirstImgBottom: string;
+  buttonFirstImgLeft: string;
+  buttonFirstTextBottom: string;
+  buttonFirstTextLeft: string;
+  buttonEndImgBottom: string;
+  buttonEndImgLeft: string;
+  buttonEndTextBottom: string;
+  buttonEndTextLeft: string;
+  buttonEndTextSize: string;
 
   /**
    * Empty constructor.
@@ -35,7 +51,7 @@ export class AnnualReport
   public init(
     context: ComponentFramework.Context<IInputs>,
     notifyOutputChanged: () => void,
-    state: ComponentFramework.Dictionary,
+    _state: ComponentFramework.Dictionary,
     container: HTMLDivElement
   ): void {
     this.notifyOutputChanged = notifyOutputChanged;
@@ -44,6 +60,7 @@ export class AnnualReport
     this.context.mode.trackContainerResize(true);
     this.resources = this.context.resources;
     this.isTestHarness = document.getElementById("control-dimensions") !== null;
+    this.isFirstLastPages = true;
   }
   /**
    * Called when any value in the property bag has changed. This includes field values, data-sets, global values such as container height and width, offline status, control metadata values such as label, visible, etc.
@@ -68,22 +85,88 @@ export class AnnualReport
     }
 
     if (context.parameters.DataJson.raw) {
-      this.dataJsonConfig = context.parameters.DataJson.raw
+      this.dataJsonConfig = context.parameters.DataJson.raw;
     }
 
     if (context.parameters.PageJson.raw) {
-      this.pageJsonConfig = context.parameters.PageJson.raw
+      this.pageJsonConfig = context.parameters.PageJson.raw;
     }
 
-    if (context.parameters.MusicRotateIconTopPosition.raw) {
-      this.musicRotateIconTopPosition = context.parameters.MusicRotateIconTopPosition.raw
+    if (context.parameters.AppWidthRate.raw) {
+      this.appWidthRate = context.parameters.AppWidthRate.raw;
     }
 
-    if (context.parameters.MusicRotateIconRightPosition.raw) {
-      this.musicRotateIconRightPosition = context.parameters.MusicRotateIconRightPosition.raw
+    if (context.parameters.AppHeightRate.raw) {
+      this.appHeightRate = context.parameters.AppHeightRate.raw;
     }
 
-    ReactDOM.render(
+    if (context.parameters.ButtonFirstWidth.raw) {
+      this.buttonFirstWidth = context.parameters.ButtonFirstWidth.raw;
+    }
+
+    if (context.parameters.ButtonFirstHeight.raw) {
+      this.buttonFirstHeight = context.parameters.ButtonFirstHeight.raw;
+    }
+
+    if (context.parameters.ButtonEndWidth.raw) {
+      this.buttonEndWidth = context.parameters.ButtonEndWidth.raw;
+    }
+
+    if (context.parameters.ButtonEndHeight.raw) {
+      this.buttonEndHeight = context.parameters.ButtonEndHeight.raw;
+    }
+
+    if (context.parameters.ButtonFirstImgBottom.raw) {
+      this.buttonFirstImgBottom = context.parameters.ButtonFirstImgBottom.raw;
+    }
+
+    if (context.parameters.ButtonFirstImgLeft.raw) {
+      this.buttonFirstImgLeft = context.parameters.ButtonFirstImgLeft.raw;
+    }
+
+    if (context.parameters.ButtonFirstTextBottom.raw) {
+      this.buttonFirstTextBottom = context.parameters.ButtonFirstTextBottom.raw;
+    }
+
+    if (context.parameters.ButtonFirstTextLeft.raw) {
+      this.buttonFirstTextLeft = context.parameters.ButtonFirstTextLeft.raw;
+    }
+
+    if (context.parameters.ButtonEndImgBottom.raw) {
+      this.buttonEndImgBottom = context.parameters.ButtonEndImgBottom.raw;
+    }
+
+    if (context.parameters.ButtonEndImgLeft.raw) {
+      this.buttonEndImgLeft = context.parameters.ButtonEndImgLeft.raw;
+    }
+
+    if (context.parameters.ButtonEndTextBottom.raw) {
+      this.buttonEndTextBottom = context.parameters.ButtonEndTextBottom.raw;
+    }
+
+    if (context.parameters.ButtonEndTextLeft.raw) {
+      this.buttonEndTextLeft = context.parameters.ButtonEndTextLeft.raw;
+    }
+
+    if (context.parameters.ButtonEndTextSize.raw) {
+      this.buttonEndTextSize = context.parameters.ButtonEndTextSize.raw;
+    }
+
+    // this.handleIsFirstLastPage = (value) => {
+    //   console.log("value", value);
+    //   console.log("this.isFirstLastPages", this.isFirstLastPages)
+    //   if ( this.isFirstLastPages && value === 0) {
+    //     this.isFirstLastPages = false;
+    //     this.notifyOutputChanged()
+    //   } else {
+    //     this.isFirstLastPages = true;
+    //   }
+    // };
+
+    const contain = this.container;
+    const root = createRoot(contain!);
+
+    root.render(
       this.records &&
         dataset.columns &&
         React.createElement(Pages, {
@@ -93,10 +176,23 @@ export class AnnualReport
           dataJsonConfig: this.dataJsonConfig,
           pageJsonConfig: this.pageJsonConfig,
           records: this.records,
-          musicRotateIconTopPosition: this.musicRotateIconTopPosition,
-          musicRotateIconRightPosition: this.musicRotateIconRightPosition
-        }),
-      this.container
+          appWidthRate: this.appWidthRate,
+          appHeightRate: this.appHeightRate,
+          buttonFirstWidth: this.buttonFirstWidth,
+          buttonFirstHeight: this.buttonFirstHeight,
+          buttonEndWidth: this.buttonEndWidth,
+          buttonEndHeight: this.buttonEndHeight,
+          buttonFirstImgBottom: this.buttonFirstImgBottom,
+          buttonFirstImgLeft: this.buttonFirstImgLeft,
+          buttonFirstTextBottom: this.buttonFirstTextBottom,
+          buttonFirstTextLeft: this.buttonFirstTextLeft,
+          buttonEndImgBottom: this.buttonEndImgBottom,
+          buttonEndImgLeft: this.buttonEndImgLeft,
+          buttonEndTextBottom: this.buttonEndTextBottom,
+          buttonEndTextLeft: this.buttonEndTextLeft,
+          buttonEndTextSize: this.buttonEndTextSize,
+          handleIsFirstLastPage: this.handleIsFirstLastPage,
+        })
     );
   }
   /**
@@ -104,7 +200,9 @@ export class AnnualReport
    * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as “bound” or “output”
    */
   public getOutputs(): IOutputs {
-    return {};
+    return {
+      IsFirstLastPages: this.isFirstLastPages,
+    } as IOutputs;
   }
 
   /**

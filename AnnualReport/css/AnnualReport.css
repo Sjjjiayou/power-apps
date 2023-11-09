@@ -5,17 +5,38 @@
 
 .swiper-slide {
   background-position: center;
-  background-size: cover;
+  background-size: fill;
 }
 
 .swiper-slide img {
   display: block;
-  width: 100%;
 }
 
 .slide-img-position {
   position: relative;
-  object-fit: contain;
+  height: 100%;
+  width: 100%;
+  object-fit: fill;
+}
+
+.element-img {
+  position: "absolute";
+  animation: fadeImgIn 2s ease-in-out forwards;
+}
+
+.slide-icon {
+  position: "absolute";
+  opacity: 0;
+  animation: fadeImgIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeImgIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .text-container {
@@ -24,7 +45,6 @@
   flex-direction: column;
   align-items: flex-start;
   color: white;
-  line-height: 32px;
   font-weight: 500;
 }
 
@@ -32,7 +52,6 @@
   display: flex;
   font-family: Roboto;
   font-style: normal;
-  line-height: 156%;
 }
 
 .text-span {
