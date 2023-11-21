@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="JJMC" constructor="AnnualReport" version="1.2.4" display-name-key="AnnualReport" description-key="AnnualReport description" control-type="standard">
+  <control namespace="JJMC" constructor="BWAnnualReport" version="1.4.5" display-name-key="BWAnnualReport" description-key="BWAnnualReport description" control-type="standard">
     <!-- dataset node represents a set of entity records on CDS; allow more than one datasets -->
     <data-set name="PageCongigRecords" display-name-key="PageCongigRecordsProperty">
       <property-set name="RecordsIndicator" display-name-key="RecordsIndicator_Key" description-key="RecordsIndicator_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
@@ -10,22 +10,18 @@
     </data-set>
     <property name="DataJson" display-name-key="Property_DataJson" description-key="Property_DataJson" of-type="SingleLine.Text" usage="bound" required="true" />
     <property name="PageJson" display-name-key="Property_PageJson" description-key="Property_PageJson" of-type="SingleLine.Text" usage="bound" required="true" />
+    <property name="MedalJson" display-name-key="Property_MedalJson" description-key="Property_MedalJson" of-type="SingleLine.Text" usage="bound" required="true" />
     <property name="AppWidthRate" display-name-key="Property_AppWidthRate" description-key="Property_AppWidthRate" of-type="Whole.None" usage="bound" required="true" />
     <property name="AppHeightRate" display-name-key="Property_AppHeightRate" description-key="Property_AppHeightRate" of-type="Whole.None" usage="bound" required="true" />
     <property name="ButtonFirstWidth" display-name-key="Property_ButtonFirstWidth" description-key="Property_ButtonFirstWidth" of-type="SingleLine.Text" usage="bound" required="true" default-value="75"/>
     <property name="ButtonFirstHeight" display-name-key="Property_ButtonFirstHeight" description-key="Property_ButtonFirstHeight" of-type="SingleLine.Text" usage="bound" required="true" default-value="75"/>
     <property name="ButtonFirstImgBottom" display-name-key="Property_ButtonFirstImgBottom" description-key="Property_ButtonFirstImgBottom" of-type="SingleLine.Text" usage="bound" required="true" default-value="78"/>
     <property name="ButtonFirstImgLeft" display-name-key="Property_ButtonFirstImgLeft" description-key="Property_ButtonFirstImgLeft" of-type="SingleLine.Text" usage="bound" required="true" default-value="264"/>
-    <property name="ButtonFirstTextBottom" display-name-key="Property_ButtonFirstTextBottom" description-key="Property_ButtonFirstTextBottom" of-type="SingleLine.Text" usage="bound" required="true" default-value="103"/>
-    <property name="ButtonFirstTextLeft" display-name-key="Property_ButtonFirstTextLeft" description-key="Property_ButtonFirstTextLeft" of-type="SingleLine.Text" usage="bound" required="true" default-value="284"/>
     <property name="ButtonEndWidth" display-name-key="Property_ButtonEndWidth" description-key="Property_ButtonEndWidth" of-type="SingleLine.Text" usage="bound" required="true" default-value="164"/>
     <property name="ButtonEndHeight" display-name-key="Property_ButtonEndHeight" description-key="Property_ButtonEndHeight" of-type="SingleLine.Text" usage="bound" required="true" default-value="43"/>
     <property name="ButtonEndImgBottom" display-name-key="Property_ButtonEndImgBottom" description-key="Property_ButtonEndImgBottom" of-type="SingleLine.Text" usage="bound" required="true" default-value="224"/>
     <property name="ButtonEndImgLeft" display-name-key="Property_ButtonEndImgLeft" description-key="Property_ButtonEndImgLeft" of-type="SingleLine.Text" usage="bound" required="true" default-value="106"/>
-    <property name="ButtonEndTextBottom" display-name-key="Property_ButtonEndTextBottom" description-key="Property_ButtonEndTextBottom" of-type="SingleLine.Text" usage="bound" required="true" default-value="238"/>
-    <property name="ButtonEndTextLeft" display-name-key="Property_ButtonEndTextLeft" description-key="Property_ButtonEndTextLeft" of-type="SingleLine.Text" usage="bound" required="true" default-value="156"/>
-    <property name="ButtonEndTextSize" display-name-key="Property_ButtonEndTextSize" description-key="Property_ButtonEndTextSize" of-type="SingleLine.Text" usage="bound" required="true" default-value="16"/>
-    <property name="IsFirstLastPages" display-name-key="Property_IsFirstLastPages" description-key="IsFirstLastPages_Desc" of-type="TwoOptions" usage="output" default-value="1"/>
+    <property name="IsPalyMusic" display-name-key="Property_IsPalyMusic" description-key="Property_IsPalyMusic" of-type="TwoOptions" usage="output" required="true" default-value="0"/>
     <resources>
       <code path="index.ts" order="1"/>
       <css path="css/AnnualReport.css" order="1" />

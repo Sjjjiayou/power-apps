@@ -1,3 +1,18 @@
+@font-face {
+  font-family: "Robot";
+  src: url("../static/font/Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "ZCOOL KuaiLe";
+  src: url("../static/font/ZCOOLKuaiLe-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "ZCOOL QingKe HuangYou";
+  src: url("../static/font/zcool-qingke-huangyou.ttf") format("truetype");
+}
+
 .swiper {
   width: 100%;
   height: 100%;
@@ -13,6 +28,7 @@
 }
 
 .slide-img-position {
+  opacity: 0;
   position: relative;
   height: 100%;
   width: 100%;
@@ -21,6 +37,7 @@
 
 .element-img {
   position: "absolute";
+  opacity: 0;
   animation: fadeImgIn 2s ease-in-out forwards;
 }
 
@@ -50,7 +67,6 @@
 
 .text-row {
   display: flex;
-  font-family: Roboto;
   font-style: normal;
 }
 
@@ -63,12 +79,36 @@
   from {
     opacity: 0;
     transform: translateY(0);
-    /* transform: translateY(-30%); */
   }
   to {
     opacity: 1;
     transform: translateY(-30%);
-    /* transform: translateY(0); */
+  }
+}
+
+.page-animation-left {
+  animation: fadeInLeft 1s ease-in-out forwards;
+}
+
+@keyframes fadeInLeft {
+  from {
+    transform: translateX(-30%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.page-animation-right {
+  animation: fadeInRight 1s ease-in-out forwards;
+}
+
+@keyframes fadeInRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-30%);
   }
 }
 
@@ -97,3 +137,4 @@
     transform: rotate(360deg);
   }
 }
+

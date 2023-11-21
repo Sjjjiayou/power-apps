@@ -8,6 +8,7 @@ export interface PageProps {
   >;
   dataJsonConfig: string;
   pageJsonConfig: string;
+  medalJsonConfig: string;
   appWidthRate: number;
   appHeightRate: number;
   buttonFirstWidth: string;
@@ -16,12 +17,7 @@ export interface PageProps {
   buttonEndHeight: string;
   buttonFirstImgBottom: string;
   buttonFirstImgLeft: string;
-  buttonFirstTextBottom: string;
-  buttonFirstTextLeft: string;
   buttonEndImgBottom: string;
   buttonEndImgLeft: string;
-  buttonEndTextBottom: string;
-  buttonEndTextLeft: string;
-  buttonEndTextSize: string;
-  handleIsFirstLastPage: (value: number) => void;
+  handleChangeMusic: (isPalyMusic: boolean) => void;
 }

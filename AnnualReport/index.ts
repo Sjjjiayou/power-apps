@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import { Pages } from "./Pages";
 
-export class AnnualReport
+export class BWAnnualReport
   implements ComponentFramework.StandardControl<IInputs, IOutputs>
 {
   notifyOutputChanged: () => void;
@@ -15,10 +15,9 @@ export class AnnualReport
   records: {
     [id: string]: ComponentFramework.PropertyHelper.DataSetApi.EntityRecord;
   };
-  handleIsFirstLastPage: (value: number) => void;
-  isFirstLastPages: boolean;
   dataJsonConfig: string;
   pageJsonConfig: string;
+  medalJsonConfig: string;
   appWidthRate: number;
   appHeightRate: number;
   buttonFirstWidth: string;
@@ -27,13 +26,18 @@ export class AnnualReport
   buttonEndHeight: string;
   buttonFirstImgBottom: string;
   buttonFirstImgLeft: string;
-  buttonFirstTextBottom: string;
-  buttonFirstTextLeft: string;
   buttonEndImgBottom: string;
   buttonEndImgLeft: string;
-  buttonEndTextBottom: string;
-  buttonEndTextLeft: string;
-  buttonEndTextSize: string;
+  isPalyMusic: boolean;
+  changePlayMusic: boolean;
+  handleChangeMusic = (isPalyMusic: boolean): void => {
+    this.changePlayMusic = isPalyMusic;
+
+    if (this.isPalyMusic !== this.changePlayMusic) {
+      this.isPalyMusic = this.changePlayMusic;
+      this.notifyOutputChanged();
+    }
+  };
 
   /**
    * Empty constructor.
@@ -60,7 +64,6 @@ export class AnnualReport
     this.context.mode.trackContainerResize(true);
     this.resources = this.context.resources;
     this.isTestHarness = document.getElementById("control-dimensions") !== null;
-    this.isFirstLastPages = true;
   }
   /**
    * Called when any value in the property bag has changed. This includes field values, data-sets, global values such as container height and width, offline status, control metadata values such as label, visible, etc.
@@ -90,6 +93,10 @@ export class AnnualReport
 
     if (context.parameters.PageJson.raw) {
       this.pageJsonConfig = context.parameters.PageJson.raw;
+    }
+
+    if (context.parameters.MedalJson.raw) {
+      this.medalJsonConfig = context.parameters.MedalJson.raw;
     }
 
     if (context.parameters.AppWidthRate.raw) {
@@ -124,14 +131,6 @@ export class AnnualReport
       this.buttonFirstImgLeft = context.parameters.ButtonFirstImgLeft.raw;
     }
 
-    if (context.parameters.ButtonFirstTextBottom.raw) {
-      this.buttonFirstTextBottom = context.parameters.ButtonFirstTextBottom.raw;
-    }
-
-    if (context.parameters.ButtonFirstTextLeft.raw) {
-      this.buttonFirstTextLeft = context.parameters.ButtonFirstTextLeft.raw;
-    }
-
     if (context.parameters.ButtonEndImgBottom.raw) {
       this.buttonEndImgBottom = context.parameters.ButtonEndImgBottom.raw;
     }
@@ -139,29 +138,6 @@ export class AnnualReport
     if (context.parameters.ButtonEndImgLeft.raw) {
       this.buttonEndImgLeft = context.parameters.ButtonEndImgLeft.raw;
     }
-
-    if (context.parameters.ButtonEndTextBottom.raw) {
-      this.buttonEndTextBottom = context.parameters.ButtonEndTextBottom.raw;
-    }
-
-    if (context.parameters.ButtonEndTextLeft.raw) {
-      this.buttonEndTextLeft = context.parameters.ButtonEndTextLeft.raw;
-    }
-
-    if (context.parameters.ButtonEndTextSize.raw) {
-      this.buttonEndTextSize = context.parameters.ButtonEndTextSize.raw;
-    }
-
-    // this.handleIsFirstLastPage = (value) => {
-    //   console.log("value", value);
-    //   console.log("this.isFirstLastPages", this.isFirstLastPages)
-    //   if ( this.isFirstLastPages && value === 0) {
-    //     this.isFirstLastPages = false;
-    //     this.notifyOutputChanged()
-    //   } else {
-    //     this.isFirstLastPages = true;
-    //   }
-    // };
 
     const contain = this.container;
     const root = createRoot(contain!);
@@ -175,23 +151,19 @@ export class AnnualReport
           columns: dataset.columns,
           dataJsonConfig: this.dataJsonConfig,
           pageJsonConfig: this.pageJsonConfig,
+          medalJsonConfig: this.medalJsonConfig,
           records: this.records,
           appWidthRate: this.appWidthRate,
           appHeightRate: this.appHeightRate,
+          handleChangeMusic: this.handleChangeMusic,
           buttonFirstWidth: this.buttonFirstWidth,
           buttonFirstHeight: this.buttonFirstHeight,
           buttonEndWidth: this.buttonEndWidth,
           buttonEndHeight: this.buttonEndHeight,
           buttonFirstImgBottom: this.buttonFirstImgBottom,
           buttonFirstImgLeft: this.buttonFirstImgLeft,
-          buttonFirstTextBottom: this.buttonFirstTextBottom,
-          buttonFirstTextLeft: this.buttonFirstTextLeft,
           buttonEndImgBottom: this.buttonEndImgBottom,
           buttonEndImgLeft: this.buttonEndImgLeft,
-          buttonEndTextBottom: this.buttonEndTextBottom,
-          buttonEndTextLeft: this.buttonEndTextLeft,
-          buttonEndTextSize: this.buttonEndTextSize,
-          handleIsFirstLastPage: this.handleIsFirstLastPage,
         })
     );
   }
@@ -201,7 +173,7 @@ export class AnnualReport
    */
   public getOutputs(): IOutputs {
     return {
-      IsFirstLastPages: this.isFirstLastPages,
+      IsPalyMusic: this.isPalyMusic,
     } as IOutputs;
   }
 
