@@ -20,7 +20,9 @@ export class AnnualReport
   /**
    * Empty constructor.
    */
-  constructor() {}
+  constructor() {
+    console.log(66666);
+  }
 
   /**
    * Used to initialize the control instance. Controls can kick off remote server calls and other initialization actions here.
@@ -62,12 +64,12 @@ export class AnnualReport
       context.mode.allocatedHeight as unknown as string
     );
 
-     if (datasetChanged || this.isTestHarness) {
-       this.records = dataset.records;
-       this.data = dateConfigSet.records;
+    if (datasetChanged || this.isTestHarness) {
+      this.records = dataset.records;
+      this.data = dateConfigSet.records;
     }
 
-    console.log("dateConfigSet", dateConfigSet)
+    console.log("dateConfigSet", dateConfigSet);
 
     ReactDOM.render(
       React.createElement(Pages, {
@@ -76,7 +78,7 @@ export class AnnualReport
         columns: dataset.columns,
         records: this.records,
         data: this.data,
-        dateConfigSet: dateConfigSet
+        dateConfigSet: dateConfigSet,
       }),
       this.container
     );
